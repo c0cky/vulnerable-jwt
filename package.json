@@ -1,0 +1,23 @@
+{
+  "name": "vulnerable-jwt",
+  "version": "1.0.0",
+  "description": "example of vulnerable jwt",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/c0cky/vulnerable-jwt.git"
+  },
+  "keywords": [
+    "vulnerable",
+    "jwt"
+  ],
+  "author": "camron godbout",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/c0cky/vulnerable-jwt/issues"
+  },
+  "homepage": "https://github.com/c0cky/vulnerable-jwt#readme"
+}

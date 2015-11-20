@@ -17,7 +17,6 @@ var User   = require('./app/models/user'); // get our mongoose model
 // =================================================================
 var port = process.env.PORT || 8080; // used to create, sign, and verify tokens
 // mongoose.connect(config.database); // connect to database
-mongoose.connect('mongodb://camrongodbout:wayne14@ds051903.mongolab.com:51903/heroku_llvss1s0');
 app.set('superSecret', config.secret); // secret variable
 
 // use body parser so we can get info from POST and/or URL parameters
@@ -128,7 +127,7 @@ apiRoutes.post('/authenticatebad', function(req, res) {
 
 				// if user is found and password is right
 				// create a token
-                var cert = fs.readFileSync('private.pem');
+                var cert = fs.readFileSync('public.pem');
 				var token = jwt.sign(user, cert, {
 					expiresInMinutes: 1440 // expires in 24 hours
 				});

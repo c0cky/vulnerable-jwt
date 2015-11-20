@@ -21,6 +21,10 @@
   },
   "homepage": "https://github.com/c0cky/vulnerable-jwt#readme",
   "dependencies": {
-    "jsonwebtoken": "^4.1.0"
+    "body-parser": "^1.14.1",
+    "express": "^4.13.3",
+    "jsonwebtoken": "^4.1.0",
+    "mongoose": "^4.2.6",
+    "morgan": "^1.6.1"
   }
 }

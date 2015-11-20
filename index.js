@@ -25,7 +25,6 @@ app.use(bodyParser.json());
 
 // use morgan to log requests to the console
 app.use(morgan('dev'));
-
 // =================================================================
 // routes ==========================================================
 // =================================================================
@@ -91,7 +90,9 @@ apiRoutes.post('/authenticate', function(req, res) {
 
 				// if user is found and password is right
 				// create a token
-				var token = jwt.sign(user, app.get('superSecret'), {
+				var cert = fs.readFileSync('private.pem', 'utf8');
+
+				var token = jwt.sign(user, cert, {
 					expiresInMinutes: 1440 // expires in 24 hours
 				});
 
@@ -127,15 +128,16 @@ apiRoutes.post('/authenticatebad', function(req, res) {
 
 				// if user is found and password is right
 				// create a token
-                var cert = fs.readFileSync('public.pem');
-				var token = jwt.sign(user, cert, {
-					expiresInMinutes: 1440 // expires in 24 hours
-				});
+                // var cert = fs.readFileSync('public.pem');
+				// var token = jwt.sign(user, cert,  {
+				// 	expiresInMinutes: 1440 // expires in 24 hours
+				// });
+				var TOKEN = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmb28iOiJiYXIiLCJpYXQiOjE0MjY1NDY5MTl9.ETgkTn8BaxIX4YqvUWVFPmum3moNZ7oARZtSBXb_vP4';
 
 				res.json({
 					success: true,
 					message: 'toke this',
-					token: token
+					token: TOKEN
 				});
 			}
 
@@ -150,13 +152,13 @@ apiRoutes.use(function(req, res, next) {
 
 	// check header or url parameters or post parameters for token
 	var token = req.body.token || req.param('token') || req.headers['x-access-token'];
-    console.log(token);
 	// decode token
 	if (token) {
 
 		// verifies secret and checks exp
-		jwt.verify(token, app.get('superSecret'), function(err, decoded) {
-            console.log(decoded);
+		var cert = fs.readFileSync('public.pem', 'utf8');
+		//app.get('superSecret')
+		jwt.verify(token, cert, function(err, decoded) {
 			if (err) {
 				return res.json({ success: false, message: 'Failed to authenticate token.' });
 			} else {
